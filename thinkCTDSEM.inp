@@ -3,9 +3,7 @@ DSEM with Continuous Time
 
 DATA:
 FILE=
-C:\Users\PWS5\OneDrive - University of Pittsburgh\Desktop\
-SoN_Proj\Yurun\ctyrActiMPLUS.txt;
-
+<<insert own, .txt or .dat>>
 
 VARIABLE:
 NAMES=

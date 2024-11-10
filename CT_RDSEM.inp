@@ -55,48 +55,34 @@ TRBTSr
 
 CLUSTER=IDNo;
 TINTERVAL=followupyrs(1);
+LAGGED=PA-TRBTSr;
 MISSING = ALL(-9999);
-lagged= PA(1);
+
 
 ANALYSIS: 
-TYPE=TWOLEVEL RANDOM;
+TYPE=TWOLEVEL;
 ESTIMATOR=BAYES;
 BITER=(2000);
 PROCESSORS=8;
                    
 MODEL: 
     %WITHIN%
-G BY CRDRot-TRBTSr@1(&1);
-!PA BY PA_mse_mean@1(&1);
-PAB| PA;
-!CVLtca WITH CVLfrl;
-!TRATSr WITH TRBTSr;
-!DigFor WITH DigBac;
-!CLK1110 WITH CLK325;
-!FLUCat WITH FLULet;
-
-
-
-bGG | G ON G&1;
-bPP | PA ON PA&1;
-bGP | G ON PA&1 ;
-bPG | PA ON G&1 ;
-!PA_mse_mean-TRBTSr PWITH PA_mse_mean&1-TRBTSr&1;
-
+G BY CRDRot-TRBTSr(&1);
+G^ ON PA^1 (cl1GPA);
+G^ ON G^1 (ar1G);
+PA^ ON PA^1 (ar1PA);
+CRDRot^-TRBTSr^ PON CRDRot^1-TRBTSr^1;
+G^ WITH PA^;
     %BETWEEN%
 GB BY CRDRot-TRBTSr*;
-!PAB BY PA_mse_mean@1;
-
-GB@1; PAB (vpab);
-bGG(arg); bPP(arp); bGP(clgp);bPG(clpg);
-GB PAB bGG bPP bGP bPG WITH GB PAB bGG bPP bGP bPG;
+GB@1;
+GB ON PA;
   
-Model Prior:
-  arg~N(0,1);
-  arp~N(0,1);
-  clgp~N(0,1);
-  clpg~N(0,1);
-  vpab~IG(1,1);
+MODEL PRIORS:
+ar1G~N(0,1);
+ar1PA~N(0,1);
+cl1GPA~N(0,1);
 
   OUTPUT:	TECH1 TECH8;
+  PLOT:	TYPE = PLOT3;
 

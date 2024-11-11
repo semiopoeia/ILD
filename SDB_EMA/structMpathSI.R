@@ -4,7 +4,7 @@ library(hms)
 
 setwd("C:/Users/PWS5/")
 
-mpathdat<-read_excel("mpath91024.xlsx", sheet = "in")
+mpathdat<-read_excel("mpathMaskFake.xlsx", sheet = "in")
 View(mpathdat)
 
 mpathdat <- mpathdat[order(mpathdat$connectionId, mpathdat$timeStampSent), ]
@@ -49,7 +49,7 @@ write.table(mpath3,file="mPath3.csv",sep=",",col.names=TRUE,row.names=FALSE)
 
 
 ######bringing in SI data########
-SIdat<-read_excel("SI.xlsx", sheet = "in")
+SIdat<-read_excel("SIFakeMask.xlsx", sheet = "in")
 #set id "initials" to match to mPath
 SIdat$initials<-SIdat$Patient_Number
 

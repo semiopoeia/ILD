@@ -1,5 +1,5 @@
  *bring in Clinical data
-import excel "C:\Users\PWS5\OneDrive - University of Pittsburgh\Desktop\SoN_Proj\Zelazny\CSSRS_03112021.xlsx", sheet("JH_CSSRS_SMU_PSQI_SLPSCID") firstrow clear
+import excel "C:\Users\PWS5\CSSRS_03112021.xlsx", sheet("JH_CSSRS_SMU_PSQI_SLPSCID") firstrow clear
 *prepping variables
 *set identifier for VisitReport (baseline divides to life time and past month)
 gen VisitReport=Visit+1
@@ -39,15 +39,15 @@ tab Behavior_C Attempt
 *note zeros on off-diagonal with attempt imply coding worked
 
 *going to save as master clinical data
-save "C:\Users\PWS5\OneDrive - University of Pittsburgh\Desktop\SoN_Proj\Zelazny\ClinicalReportMaster_CSSRS.dta",replace
+save "C:\Users\PWS5\ClinicalReportMaster_CSSRS.dta",replace
 
 *create a subset to later merge to just compare ideation and behavior reports
 keep ID VisitReport CSSRSdate Ideation_C Behavior_C
 rename CSSRSdate DateProxy
-save "C:\Users\PWS5\OneDrive - University of Pittsburgh\Desktop\SoN_Proj\Zelazny\ClinicIdeationBehavior.dta",replace
+save "C:\Users\PWS5\ClinicIdeationBehavior.dta",replace
 
 **bring in original EMA data sheet
-import excel "C:\Users\PWS5\OneDrive - University of Pittsburgh\Desktop\SoN_Proj\Zelazny\NEW DIARY & ACTIGRAPHY WITH DEMOGRAPHICS_JZ.xlsx", sheet("NEW DIARY & ACTIGRAPHY WITH DEM") firstrow clear
+import excel "C:\Users\PWS5\NEW DIARY & ACTIGRAPHY WITH DEMOGRAPHICS_JZ.xlsx", sheet("NEW DIARY & ACTIGRAPHY WITH DEM") firstrow clear
 
 *says that acti.sleep eff. miscalculated
 drop SE_AC
@@ -75,16 +75,16 @@ replace Behavior_P=0 if nSH==0 & nSB==0
 *coding was fine, but only 1 person reported an actual attempt
 gen DateProxy=ACMORNINGDATE
 *save as a master EMA file
-save "C:\Users\PWS5\OneDrive - University of Pittsburgh\Desktop\SoN_Proj\Zelazny\EMAMaster.dta", replace
+save "C:\Users\PWS5\EMAMaster.dta", replace
 
 *create sub-file for just general ideation and behavior scores from both EMA and ClinEvals
 keep GROUP-AC_MISSING Ideation_P Behavior_P DateProxy AGE-NicotineDependence
-save "C:\Users\PWS5\OneDrive - University of Pittsburgh\Desktop\SoN_Proj\Zelazny\EMA_IdeationBehavior.dta",replace
+save "C:\Users\PWS5\EMA_IdeationBehavior.dta",replace
 
 *merge clinical evals with EMA
 merge m:m ID DateProxy using "C:\Users\PWS5\OneDrive - University of Pittsburgh\Desktop\SoN_Proj\Zelazny\ClinicIdeationBehavior.dta"
 format DateProxy %td
-save "C:\Users\PWS5\OneDrive - University of Pittsburgh\Desktop\SoN_Proj\Zelazny\EMA_ClinicEval_comb_IdeationBehavior.dta", replace
+save "C:\Users\PWS5\EMA_ClinicEval_comb_IdeationBehavior.dta", replace
 sort ID DateProxy
 
 *creating a month variable
@@ -238,12 +238,12 @@ replace DirBehDiff=. if maxP_C_BehDiff==.
 label values DirBehDiff direction
 
 *save as full compiled with all EMA and Clinical Reports
-save "C:\Users\PWS5\OneDrive - University of Pittsburgh\Desktop\SoN_Proj\Zelazny\EMA_ClinRepLong.dta", replace
+save "C:\Users\PWS5\EMA_ClinRepLong.dta", replace
 bysort ID ReportPeriod:gen EMAper=_N
 
 *make a dataset matched to clinical assessment date and per month max from patient
 keep if VisitReport>0 & VisitReport!=.
-save "C:\Users\PWS5\OneDrive - University of Pittsburgh\Desktop\SoN_Proj\Zelazny\MatchClinPat.dta", replace
+save "C:\Users\PWS5\MatchClinPat.dta", replace
 
 egen wnDyadSD_IdeaDif=sd(maxP_C_IdeaDiff),by(ID)
 egen wnDyadAbsM_IdeaDif=mean(absIdeaDiff),by(ID)
@@ -257,7 +257,7 @@ replace RaceCat=1 if race=="White or Caucasian"
 
 label define racelab 1"White" 2"Asian" 3"Black" 4"Other"
 label values RaceCat racelab
-save "C:\Users\PWS5\OneDrive - University of Pittsburgh\Desktop\SoN_Proj\Zelazny\MatchClinPat.dta", replace
+save "C:\Users\PWS5\MatchClinPat.dta", replace
 
 
 *running models for discrepancy analysis

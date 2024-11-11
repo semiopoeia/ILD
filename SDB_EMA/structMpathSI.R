@@ -2,7 +2,7 @@ library(tidyverse)
 library(readxl)
 library(hms)
 
-setwd("C:/Users/PWS5/OneDrive - University of Pittsburgh/Desktop/SleepHUB/JonnaMorris/")
+setwd("C:/Users/PWS5/")
 
 mpathdat<-read_excel("mpath91024.xlsx", sheet = "in")
 View(mpathdat)

@@ -2,7 +2,6 @@ install.packages("dtwclust",dep=T)
 library(dtwclust)
 library(tidyverse)
 
-setwd("C:/Users/PWS5/OneDrive - University of Pittsburgh/Desktop/SoN_Proj/Yurun/")
 #brining in the BLSA data
 rawBLSA<-read_csv("BLSA_ACR_1440_20210109(in).csv",
 			col_types = cols(date = col_date(format = "%m/%d/%Y")))
@@ -322,6 +321,7 @@ write.table(cluster_df3,"sbd6clusters.csv",row.names=F, col.names=T,sep=",")
 
 
 results<-load("TSclusterPP.Rdata")
+
 
 
 

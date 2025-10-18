@@ -1,4 +1,3 @@
-setwd("C:/Users/PWS5/OneDrive - University of Pittsburgh/Desktop/SleepHUB/")
 
 df<-read.csv("M1016_Worksheet.07.02.csv")
 
@@ -40,4 +39,5 @@ for (i in seq_len(nrow(df))) {
   } else {
     seen_pre_or_post <- FALSE
   }
+
 }

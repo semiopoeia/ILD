@@ -1,5 +1,5 @@
  *bring in Clinical data
-import excel "C:\Users\PWS5\CSSRS_03112021.xlsx", sheet("JH_CSSRS_SMU_PSQI_SLPSCID") firstrow clear
+import excel "C:\Users\CSSRS_03112021.xlsx", sheet("JH_CSSRS_SMU_PSQI_SLPSCID") firstrow clear
 *prepping variables
 *set identifier for VisitReport (baseline divides to life time and past month)
 gen VisitReport=Visit+1
@@ -329,3 +329,4 @@ melogit AgreeBeh Behavior_C GENDER i.RaceCat||ID: ,or
 mixed absBehDiff Behavior_C Behavior_P ||ID:
 
 mlogit DirBehDiff Behavior_C Behavior_P GENDER AgeConsent i.RaceCat PSR_Depression, vce(cluster ID) baseoutcome(0) rr
+

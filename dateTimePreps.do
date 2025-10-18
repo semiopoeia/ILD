@@ -20,4 +20,5 @@ apnea_total_count_3-spo2_below86_percent elapseday-DayMinute{
 }
 replace questionlistname=subinstr(questionlistname," ","",.)
 
-export delimited using "C:\Users\PWS5\OneDrive - University of Pittsburgh\Desktop\SleepHUB\JonnaMorris\ILDexam.dat", delimiter(tab) novarnames replace
+
+export delimited using "C:\Users\ILDexam.dat", delimiter(tab) novarnames replace

@@ -1,4 +1,4 @@
-setwd("C:/Users/PWS5/OneDrive - University of Pittsburgh/Desktop/SleepHUB/JonnaMorris/")
+setwd("<<<path>>>")
 ####append and merge for updated data May 22nd#####
 si1<-read_excel("Sleep Image 3.1.24 to 10.31.24.xlsx")
 si2<-read_excel("SIeep Image 11.1.24 to 5.1.25.xlsx")
@@ -110,4 +110,5 @@ for (var in critdiag_vars4) {
 final_table4 <- do.call(rbind, cross_tabs)
 
 final_table<-rbind(final_table3,final_table4)
+
 write.table(final_table,"MaleTableMay22_25.csv",sep=",",row.names=F)

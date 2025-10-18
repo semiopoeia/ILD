@@ -2,7 +2,7 @@ library(tidyverse)
 library(readxl)
 library(hms)
 
-setwd("C:/Users/PWS5/OneDrive - University of Pittsburgh/Desktop/SleepHUB/JonnaMorris/")
+setwd("<<<path>>>")
 
 mpathdat<-read_excel("mpath91024.xlsx", sheet = "in")
 View(mpathdat)
@@ -95,3 +95,4 @@ sexid<-read_excel("sex and ID.xlsx")
 sexid$Patient_Number<-sexid$`Redcap ID`
 combined_si <- rbind(si1, si2[,-c(2,3)])
 SI_Sex <- merge(combined_si, sexid, by = "Patient_Number")
+

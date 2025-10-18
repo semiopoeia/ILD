@@ -4,7 +4,6 @@ library(readxl)
 library(hms)
 library(lubridate)
 
-setwd("C:/Users/PWS5/OneDrive - University of Pittsburgh/Desktop/SleepHUB/JonnaMorris/")
 # load data
 mpath_raw <- fread("mPath103124_fixed.csv", stringsAsFactors = F)
 
@@ -115,5 +114,6 @@ SI_mPath_innerjoin<-
 	arrange(SI_id.y,DateStart,TimeStart)
 View(SI_mPath_innerjoin)
 write.table(SI_mPath_innerjoin,file="innerjoinSImPath.csv",sep=",",col.names=TRUE, row.names=FALSE)
+
 
 ####here SI is merged with Demog gives n=43, while n=44 without the merging###

@@ -3,8 +3,7 @@ DSEM with Continuous Time
 
 DATA:
 FILE=
-C:\Users\PWS5\OneDrive - University of Pittsburgh\Desktop\
-SoN_Proj\Yurun\factor2.dat;
+C:\Users\factor2.dat;
 
 
 VARIABLE:
@@ -204,5 +203,6 @@ vbgp~IG(2,4);
 
 OUTPUT:	TECH1 TECH8 STDYX STAND(CLUSTER) FSCOMPARISON;
 PLOT: TYPE=PLOT3; 
+
 
 

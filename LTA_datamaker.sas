@@ -1,6 +1,5 @@
 PROC IMPORT OUT= WORK.NEWFILE1 
-            DATAFILE= "C:\Users\PWS5\OneDrive - University of Pittsburgh
-\Desktop\SleepHUB\JonnaMorris\SHHS_SymptomProgression_CVD_02212022.csv" 
+            DATAFILE= "C:\Users\SHHS_SymptomProgression_CVD_02212022.csv" 
             DBMS=CSV REPLACE;
      GETNAMES=YES;
      DATAROW=2; 
@@ -258,3 +257,4 @@ run;
 proc freq data=groupOSA;
 tables OSAcat4_s1 OSAcat4_s2;
 run;
+

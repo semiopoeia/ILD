@@ -3,8 +3,7 @@ DSEM with Continuos Time
 
 DATA:
 FILE=
-C:\Users\PWS5\OneDrive - University of Pittsburgh\Desktop\
-SleepHUB\JonnaMorris\ILDexam.dat;
+C:\Users\PWS5\ILDexam.dat;
 
 
 VARIABLE:
@@ -101,4 +100,5 @@ vmr~IG(1,1);
 vsm~IG(1,1);
 vmm~IG(1,1);
 rs~IG(1,1);
+
 rm~IG(1,1);

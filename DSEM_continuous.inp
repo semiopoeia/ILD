@@ -1,0 +1,104 @@
+TITLE:
+DSEM with Continuos Time
+
+DATA:
+FILE=
+C:\Users\PWS5\OneDrive - University of Pittsburgh\Desktop\
+SleepHUB\JonnaMorris\ILDexam.dat;
+
+
+VARIABLE:
+NAMES=
+matchid si_idx age start_date average_signal_quality 
+sqi sleep_efficiency sleep_latency_sec sleep_duration_sec 
+sai fragmentation_elfcbb periodicity_elfcnb 
+stable_duration_sec stable_percent 
+unstable_duration_sec unstable_percent 
+rem_duration_sec rem_percent cvhr_stable_percent 
+cvhr_unstable_percent cvhr_rem_percent apnea_stable_index 
+apnea_unstable_index apnea_rem_index 
+tst_sec waso_sec wake_transitions 
+spo2_below90_duration_sec spo2_below90_percent 
+spo2_below88_duration_sec spo2_below88_percent 
+spo2_below80_duration_sec spo2_below80_percent 
+min_spo2 max_spo2 mean_spo2 sahi_3 sahi_4 
+sahi_obstructive_3 sahi_obstructive_4 sahi_central_3 
+sahi_central_4 srdi_3 srdi_4 odi_3 odi_4 
+min_apnea_duration_sec max_apnea_duration_sec 
+mean_apnea_duration_sec min_heart_rate_bpm 
+max_heart_rate_bpm mean_heart_rate_bpm 
+report_start_date report_end_date 
+apnea_total_count_3 apnea_total_count_4 
+apnea_count_obstructive_3 apnea_count_obstructive_4 
+apnea_count_central_3 apnea_count_central_4 
+spo2_below89_duration_sec spo2_below89_percent 
+spo2_below86_duration_sec spo2_below86_percent date 
+questionlistname elapseday elapsehr mood_smiley 
+stress_smiley sleepiness_slidernegpos 
+fatigue_slidernegpos ematimewindow 
+mSQI dSQI mSAHI3 dSAHI3 mSAHI4 dSAHI4 
+day datestart1 DayMinute studyhrs
+;
+USEVAR=
+si_idx
+sleepiness_slidernegpos
+mood_smiley studyhrs
+;
+CLUSTER=si_idx;
+LAGGED=sleepiness_slidernegpos(1)
+mood_smiley(1);
+MISSING = ALL(-9999);
+TINTERVAL=studyhrs(4);
+
+
+ANALYSIS: 
+TYPE=TWOLEVEL RANDOM;
+ESTIMATOR=BAYES;
+FBITER=2500;
+BITER=5000(1000);
+PROCESSORS=12;
+
+MODEL: 
+    %WITHIN%
+sleepAR | 
+sleepiness_slidernegpos ON sleepiness_slidernegpos&1;
+
+moodAR | 
+mood_smiley ON mood_smiley&1;
+
+sleepCLmood | 
+sleepiness_slidernegpos ON mood_smiley&1;
+
+moodCLsleep | 
+mood_smiley ON sleepiness_slidernegpos&1;
+
+res_sleep| sleepiness_slidernegpos;
+res_mood| mood_smiley;
+
+    %BETWEEN%
+[sleepiness_slidernegpos];[mood_smiley];
+[sleepAR](sar);[moodAR](mar);
+[sleepCLmood](scl);[moodCLsleep](mcl);
+[res_sleep];[res_mood];
+
+sleepiness_slidernegpos(sv); mood_smiley(mv);
+sleepAR (vsr);moodAR (vmr);sleepCLmood(vsm);moodCLsleep (vmm);
+res_sleep (rs);res_mood (rm);
+res_sleep WITH res_mood;
+
+  OUTPUT:	TECH1 TECH8;
+  PLOT:	TYPE = PLOT3;
+
+MODEL PRIORS:
+sar~N(0.5,0.1);
+mar~N(0.5,0.1);
+scl~N(0.2,0.1);
+mcl~N(0.2,0.1);
+sv~IG(1,1);
+mv~IG(1,1);
+vsr~IG(1,1);
+vmr~IG(1,1);
+vsm~IG(1,1);
+vmm~IG(1,1);
+rs~IG(1,1);
+rm~IG(1,1);

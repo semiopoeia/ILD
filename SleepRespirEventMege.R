@@ -1,4 +1,4 @@
-setwd("C:/Users/PWS5/OneDrive - University of Pittsburgh/Desktop/SleepHUB/JonnaMorris")
+setwd("<<path>>")
 
 #set up and sort sleep events data
 SleepEvent<-read.csv("SleepEvents.csv",header=T)%>%
@@ -30,4 +30,5 @@ fill(Attribute2,.direction="down")%>%
 mutate(UnitElapsOverall=StartDate-first(StartDate))%>%
 mutate(SI_id=1)
 View(SlpRspEventFill)
+
 
